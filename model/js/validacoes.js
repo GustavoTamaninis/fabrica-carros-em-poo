@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function(){
                 e.preventDefault();
                 console.log("Envio cancelado.");
             }else{
-                console.log("Envio confirmado para o PHP");
+                console.log("Envio confirmado para o PHP.");
             }
         });
     }
