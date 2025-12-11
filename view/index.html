@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu da Fábrica</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <script src="../model/js/validacoes.js"></script>
+</head>
+<body>
+    <div>
+        <button type="menu" id="alternar-modo">&#128262</button>
+    </div>
+    <div class="menu-container" id="menu">
+        <h1>Gerenciamento da Fábrica de Carros&#x1F697</h1>
+        <p>Escolha uma ação:</p>
+        <form id="menuForm" action="../controller/processa.php" method="post">
+            <button type="submit" name="acao" value="construir" id="btn1">Fabricar Carros</button>
+            <button type="submit" name="acao" value="movimentar" id="btn2">Vender um Carro</button>
+            <button type="submit" name="acao" value="ver_info" id="btn3">Ver Informações dos Carros</button>
+        </form>
+    </div>
+</body>
+</html>

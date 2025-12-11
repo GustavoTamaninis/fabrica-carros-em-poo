@@ -1,0 +1,84 @@
+@charset "UTF-8";
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f7f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+body.tema-escuro{
+    background-color: #181717;
+    color: white;
+}
+
+.menu-container{
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 300px;
+}
+
+.tema-escuro{
+    background-color: #292929;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.8);
+}
+
+h1{
+    margin-bottom: 10px;
+}
+
+button{
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transform: background 0.3s;
+}
+
+button[type='submit']{
+    background-color: #007bff;
+    color: white;
+}
+
+button[type='submit']:hover{
+    background-color: #0056b3;
+}
+
+button[type='submit'].tema-escuro{
+    background-color: #6c0097;
+    color: white;
+}
+
+button[type='submit'].tema-escuro:hover{
+    background-color: #5d0081;
+}
+
+button[type='menu']{
+    background-color: #007bff;
+    width: 50px;
+}
+
+button[type='menu']:hover{
+    background-color: #0056b3;
+    width: 50px;
+}
+
+button[type='menu'].tema-escuro{
+    background-color: #6c0097;
+    width: 50px;
+}
+
+button[type='menu'].tema-escuro:hover{
+    background-color: #5d0081;
+    width: 50px;
+}
