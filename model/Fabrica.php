@@ -9,8 +9,24 @@
             
         }
         
-        public function venderCarro(){
-            //irá retirar um carro do array;
+        public function venderCarro(string $modelo, string $cor): void{
+            $achou = false;
+            foreach($this->carros as $i => $carro){
+                if($carro->getModelo() == $modelo && $carro->getCor() == $cor){
+                    $achou = true;
+                    array_splice($this->carros, $i, 1);
+                }
+            }
+            if($achou == false){
+                echo "<p>Nenhum carro com esta cor e modelo cadastrado.</p>";
+                echo '<form action="processa.php" method="post">';
+                echo '<input type="hidden" name="acao" value="vender">';
+                echo '<button type="submit">⬅️Retornar</button>';
+                echo '</form>'; 
+            }else{   
+                echo "O carro foi vendido!";
+                echo "<br><a href='../view/index.html'>⬅️Voltar ao menu</a>";
+            }
         }
 
         public function fabricarCarro($i, $cor, $modelo): object{
@@ -22,13 +38,13 @@
         }
 
         public function geraInfoCarros(){
-            $info = "<h2>🏭 Informações dos Carros:</h2>";
+            $info = "";
             if(!empty($this->carros)){
                 foreach($this->carros as $i => $carro){
-                $info .= "<p>🚗 " . ($i+1) . "º Carro </p>";
-                $info .= "<p><strong>Modelo:</strong> {$carro->getModelo()}</p>";
-                $info .= "<p><strong>Cor:</strong> {$carro->getCor()}</p><br>";
-            }
+                    $info .= "<p>🚗 " . ($i+1) . "º Carro </p>";
+                    $info .= "<p><strong>Modelo:</strong> {$carro->getModelo()}</p>";
+                    $info .= "<p><strong>Cor:</strong> {$carro->getCor()}</p><br>";
+                }
             }else{
                 $info .= "<p>Nenhum carro cadastrado.</p>";
                 echo "<br><a href='../view/index.html'>⬅️Voltar ao menu</a>";
