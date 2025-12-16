@@ -27,7 +27,7 @@
                 foreach($this->carros as $i => $carro){
                 $info .= "<p>🚗 " . ($i+1) . "º Carro </p>";
                 $info .= "<p><strong>Modelo:</strong> {$carro->getModelo()}</p>";
-                $info .= "<p><strong>Cor:</strong> {$carro->getCor()}</p>";
+                $info .= "<p><strong>Cor:</strong> {$carro->getCor()}</p><br>";
             }
             }else{
                 $info .= "<p>Nenhum carro cadastrado.</p>";

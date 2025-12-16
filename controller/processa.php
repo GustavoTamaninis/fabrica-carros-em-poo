@@ -56,13 +56,11 @@
                 $cor = [];
                 for($i = 0; $i < $qtde_carros; $i++){
                     $cor[$i] =  $_POST["cor_carro_{$i}"] ?? '';
-                    //echo "<br>Armazenado a cor " . $cor[$i] . " no veículo " . $i+1;
                 }
 
                 $modelo = [];
                 for($i = 0; $i < $qtde_carros; $i++){
                     $modelo[$i] = $_POST["modelo_carro_{$i}"] ?? '';
-                    //echo "<br>Armazenado o modelo " . $modelo[$i] . " no veículo " . $i+1;
                 }
                   
                 for($i = 0; $i < $qtde_carros; $i++){
@@ -74,8 +72,8 @@
                 echo "<h2>🏭 Os seguintes carros foram construídos:</h2>";
                 for($i = 0; $i < $qtde_carros; $i++){
                     echo "🚗 " . ($i+1) . "º Carro:<br>";
-                    echo "Modelo: {$carros[$i]->getModelo()}<br>";
-                    echo "Cor: {$carros[$i]->getCor()}<br><br>";
+                    echo "<p><strong>Modelo:</strong> {$carros[$i]->getModelo()}</p>";
+                    echo "<p><strong>Cor:</strong> {$carros[$i]->getCor()}</p><br>";
                 }
                 echo "<br><a href='../view/index.html'>⬅️Voltar ao menu</a>";
                 break;
@@ -100,12 +98,17 @@
 
                 echo "
                         <br><form action='processa.php' method='POST'>
-                        <button type='submit' name='acao' value='limpar_sessao'>🧹 Nova Construção</button>
+                        <button type='submit' name='acao' value='limpar_sessao'>🗑️ Levar todos os carros para o ferro-velho</button>
                         </form>
                         <br><a href='../view/index.html'>⬅️Voltar ao menu</a>;
                      ";
                 break;
             case 'limpar_sessao':
+                session_unset();
+                session_destroy();
+                echo "<h2>🗑️ Todos os carros da fábrica viraram sucata!</h2>";
+                echo "<p>Você pode construir novos carros agora.</p>";
+                echo "<a href='../view/index.html'>⬅️Voltar ao menu inicial.</a>";
                 break;
             default:
                 echo "<h2>❌ Ação inválida.</h2>";
