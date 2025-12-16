@@ -30,13 +30,13 @@
                             <input type='hidden' name='qtde_carros' value='{$qtde_carros}'>
                             <input type='hidden' name='qtde_carros' value='{$qtde_carros}'>
                             <input type='hidden' name='qtde_carros' value='{$qtde_carros}'>
+
+                            <label><strong>Modelo do " . $i+1 . "º Carro:</strong></label><br>
+                            <input type='text' name='modelo_carro_{$i}' required><br><br>
     
                             <label><strong>Cor do " . $i+1 . "º Carro:</strong></label><br>
-                            <input type='text' name='cor_carro_{$i}' required><br><br>
-    
-                            <label><strong>Modelo do " . $i+1 . "º Carro:</strong></label><br>
-                            <input type='text' name='modelo_carro_{$i}' required><br><br><br>
-                    ";
+                            <input type='text' name='cor_carro_{$i}' required><br><br><br>        
+                        ";
                     }
                     echo '<button type="submit">Avançar</button>
                     </form>';
@@ -44,6 +44,7 @@
                 break;
             case 'finalizar_carros':
                 $qtde_carros = (int)$_POST['qtde_carros'] ?? 0;
+                $carros = [];
 
                 $cor = [];
                 for($i = 0; $i < $qtde_carros; $i++){
@@ -56,12 +57,23 @@
                     $modelo[$i] = $_POST["modelo_carro_{$i}"] ?? '';
                     //echo "<br>Armazenado o modelo " . $modelo[$i] . " no veículo " . $i+1;
                 }
-                break;
-
+                
                 $fabrica = new Fabrica();
                 for($i = 0; $i < $qtde_carros; $i++){
-                    $fabrica->fabricarCarro($qtde_carros, $cor, $modelo);
+                    array_push($carros, $fabrica->fabricarCarro($i, $cor, $modelo));
                 }
+
+                $_SESSION['fabrica'] = serialize($carros); //ou posso nomear como 'carros'
+
+                echo "<h2>🏭 Os seguintes carros foram construídos:</h2>";
+
+                for($i = 0; $i < $qtde_carros; $i++){
+                    echo "🚗 " . ($i+1) . "º Carro:<br>";
+                    echo "Modelo: {$carros[$i]->getModelo()}<br>";
+                    echo "Cor: {$carros[$i]->getCor()}<br><br>";
+                }
+                echo "<br><a href='../view/index.html'>⬅️Voltar ao menu</a>";
+                break;
             case 'vender':
                 break;
             case 'selecionar_carro':
@@ -69,7 +81,7 @@
                 break;
             case 'vender_carro':
                 break;
-            case 'finalizar_venda';
+            case 'finalizar_venda':
                 break;
             case 'ver_info':
                 break;
