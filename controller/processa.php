@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once "../model/Fabrica.php";
     require_once "../model/Carro.php";
 
@@ -46,6 +47,12 @@
                 $qtde_carros = (int)$_POST['qtde_carros'] ?? 0;
                 $carros = [];
 
+                if(!isset($_SESSION['fabrica'])){
+                    $fabrica = new Fabrica();
+                }else{
+                    $fabrica = unserialize($_SESSION['fabrica']);
+                }
+
                 $cor = [];
                 for($i = 0; $i < $qtde_carros; $i++){
                     $cor[$i] =  $_POST["cor_carro_{$i}"] ?? '';
@@ -57,16 +64,14 @@
                     $modelo[$i] = $_POST["modelo_carro_{$i}"] ?? '';
                     //echo "<br>Armazenado o modelo " . $modelo[$i] . " no veículo " . $i+1;
                 }
-                
-                $fabrica = new Fabrica();
+                  
                 for($i = 0; $i < $qtde_carros; $i++){
                     array_push($carros, $fabrica->fabricarCarro($i, $cor, $modelo));
                 }
 
-                $_SESSION['fabrica'] = serialize($carros); //ou posso nomear como 'carros'
-
+                $_SESSION['fabrica'] = serialize($fabrica);
+                
                 echo "<h2>🏭 Os seguintes carros foram construídos:</h2>";
-
                 for($i = 0; $i < $qtde_carros; $i++){
                     echo "🚗 " . ($i+1) . "º Carro:<br>";
                     echo "Modelo: {$carros[$i]->getModelo()}<br>";
@@ -84,6 +89,21 @@
             case 'finalizar_venda':
                 break;
             case 'ver_info':
+                if(!isset($_SESSION['fabrica'])){
+                    echo "<h2>⚠️ Nenhum carro foi fabricado ainda!</h2>";
+                    echo "<br><a href='../view/index.html'>⬅️Voltar ao menu</a>";
+                    break;
+                }
+
+                $fabrica = unserialize($_SESSION['fabrica']);
+                echo $fabrica->geraInfoCarros();
+
+                echo "
+                        <br><form action='processa.php' method='POST'>
+                        <button type='submit' name='acao' value='limpar_sessao'>🧹 Nova Construção</button>
+                        </form>
+                        <br><a href='../view/index.html'>⬅️Voltar ao menu</a>;
+                     ";
                 break;
             case 'limpar_sessao':
                 break;

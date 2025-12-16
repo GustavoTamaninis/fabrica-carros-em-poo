@@ -14,7 +14,6 @@
         }
 
         public function fabricarCarro($i, $cor, $modelo): object{
-            //deverá acrescenter um (ou mais) carros ao array;
             $carro = new Carro();
             $carro->setCor($cor[$i]);
             $carro->setModelo($modelo[$i]);
@@ -22,8 +21,20 @@
             return $carro;
         }
 
-        public function getInfoCarros($carros){
-            //devo usar get para cada um dos atributos do carro;
+        public function geraInfoCarros(){
+            $info = "<h2>🏭 Informações dos Carros:</h2>";
+            if(!empty($this->carros)){
+                foreach($this->carros as $i => $carro){
+                $info .= "<p>🚗 " . ($i+1) . "º Carro </p>";
+                $info .= "<p><strong>Modelo:</strong> {$carro->getModelo()}</p>";
+                $info .= "<p><strong>Cor:</strong> {$carro->getCor()}</p>";
+            }
+            }else{
+                $info .= "<p>Nenhum carro cadastrado.</p>";
+                echo "<br><a href='../view/index.html'>⬅️Voltar ao menu</a>";
+            }
+
+            return $info;
         }
     }
 ?>
