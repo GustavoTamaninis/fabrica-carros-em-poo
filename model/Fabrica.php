@@ -6,7 +6,6 @@
 
         public function setCarros(object $carro): void{ //Carros $carro (?)
             array_push($this->carros, $carro);
-            
         }
         
         public function venderCarro(string $modelo, string $cor): void{
@@ -29,7 +28,7 @@
             }
         }
 
-        public function fabricarCarro($i, $cor, $modelo): object{
+        public function fabricarCarro(int $i, array $cor, array $modelo): object{
             $carro = new Carro();
             $carro->setCor($cor[$i]);
             $carro->setModelo($modelo[$i]);
@@ -37,7 +36,7 @@
             return $carro;
         }
 
-        public function geraInfoCarros(){
+        public function geraInfoCarros(): string{
             $info = "";
             if(!empty($this->carros)){
                 foreach($this->carros as $i => $carro){
